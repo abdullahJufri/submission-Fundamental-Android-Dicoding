@@ -4,14 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.submission2github.databinding.ItemRowUserBinding
-import com.bangkit.submission2github.model.DetailResponse
 import com.bangkit.submission2github.model.UserItem
 import com.bumptech.glide.Glide
-import java.util.ArrayList
 
-class FollowerAdapter(private val listFollower: List<UserItem>) : RecyclerView.Adapter<FollowerAdapter.ViewHolder>(){
-    private val listUser = ArrayList<UserItem>()
-    class ViewHolder(var binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root)
+class FollowAdapter(private val listFollower: List<UserItem>) : RecyclerView.Adapter<FollowAdapter.ViewHolder>(){
+    inner class ViewHolder(var binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)

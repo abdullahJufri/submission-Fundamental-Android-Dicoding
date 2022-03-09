@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.bangkit.submission2github.model.UserItem
 import com.bangkit.submission2github.ui.fragment.FollowerFragment
 import com.bangkit.submission2github.ui.fragment.FollowingFragment
 
-class SectionsPagerAdapter(activity: AppCompatActivity, private val bundle: Bundle) : FragmentStateAdapter(activity) {
+class SectionsPagerAdapter(activity: AppCompatActivity, private val bundle: Bundle) :
+    FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
         return 2
     }

@@ -27,43 +27,41 @@ class DetailUserActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar?.title = "Detail User "
+        //set back button
+        actionbar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.isLoading.observe(this, {
+
+        viewModel.isLoading.observe(this) {
             event.showLoading(it, binding.progressBar)
-        })
+        }
 
-        viewModel.listDetail.observe(this, { listGithubUser ->
+        viewModel.listDetail.observe(this) { listGithubUser ->
             setDetailItem(listGithubUser)
             event.showLoading(false, binding.progressBar)
-        })
-
-
+        }
 
 
         setTabLayout()
-
-
-
     }
 
     private fun setDetailItem(detailList: DetailResponse) {
 
-            binding.apply {
-                Glide.with(this@DetailUserActivity)
-                    .load(detailList.avatarUrl)
-                    .circleCrop()
-                    .into(imgDetailAvatar)
-                tvDetailName.text = detailList.name ?: detailList.location
-                tvDetailUsername.text = detailList.login
-                tvDetailLocation.text = detailList.location ?: "No location"
-                tvDetailCompany.text = detailList.company ?: "No Company"
-                tvDetailRepo.text = resources.getString(R.string.repository, detailList.publicRepos)
-                tvDetailFollower.text = resources.getString(R.string.follower, detailList.followers)
-                tvDetailFollowing.text =
-                    resources.getString(R.string.following, detailList.following)
-
-
-
+        binding.apply {
+            Glide.with(this@DetailUserActivity)
+                .load(detailList.avatarUrl)
+                .circleCrop()
+                .into(imgDetailAvatar)
+            tvDetailName.text = detailList.name ?: "No Name"
+            tvDetailUsername.text = detailList.login
+            tvDetailLocation.text = detailList.location ?: "No location"
+            tvDetailCompany.text = detailList.company ?: "No Company"
+            tvDetailRepo.text = resources.getString(R.string.repository, detailList.publicRepos)
+            tvDetailFollower.text = resources.getString(R.string.follower, detailList.followers)
+            tvDetailFollowing.text =
+                resources.getString(R.string.following, detailList.following)
         }
     }
 
@@ -86,6 +84,11 @@ class DetailUserActivity : AppCompatActivity() {
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     companion object {
         const val EXTRA_USERNAME = "extra_username"
 
@@ -94,6 +97,5 @@ class DetailUserActivity : AppCompatActivity() {
             R.string.tab_1,
             R.string.tab_2
         )
-
     }
 }

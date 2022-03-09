@@ -1,13 +1,11 @@
 package com.bangkit.submission2github.ui.viewmodels
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.submission2github.api.ApiConfig
-import com.bangkit.submission2github.model.DetailResponse
 import com.bangkit.submission2github.model.UserItem
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,8 +39,8 @@ class FollowerViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
 
-        })    }
-
+        })
+    }
 
 
 }

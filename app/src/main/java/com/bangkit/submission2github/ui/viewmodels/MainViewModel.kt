@@ -17,7 +17,6 @@ class MainViewModel : ViewModel() {
     val getListUsers: LiveData<List<UserItem>> = _listUsers
 
     private val _totalCount = MutableLiveData<Int>()
-    val getTotalCount: LiveData<Int> = _totalCount
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

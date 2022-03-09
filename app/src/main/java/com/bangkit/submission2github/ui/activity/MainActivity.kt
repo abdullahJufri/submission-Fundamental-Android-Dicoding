@@ -29,19 +29,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getListUsers.observe(this, { listGithubUser ->
+        viewModel.getListUsers.observe(this) { listGithubUser ->
             setUserData(listGithubUser)
-        })
+        }
 
-        viewModel.isLoading.observe(this, {
+        viewModel.isLoading.observe(this) {
             event.showLoading(it, binding.progressBar)
-        })
-
-
-//
-//        viewModel.getTotalCount.observe(this, {
-//            showText(it)
-//        })
+        }
 
         val layoutManager = LinearLayoutManager(this@MainActivity)
         binding.rvUsers.layoutManager = layoutManager
@@ -63,7 +57,6 @@ class MainActivity : AppCompatActivity() {
                     viewModel.findUsers(it)
                     setUserData(listUserItem)
                 }
-//                hideKeyboard()
                 return true
             }
 
@@ -83,12 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
         adapter = SearchAdapter(listUser)
         binding.rvUsers.adapter = adapter
-//
-//        adapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback {
-//            override fun onItemClicked(data: UserItem) {
-//                showSelectedUser(data)
-//            }
-//        })
+
 
         adapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback {
 
@@ -100,12 +88,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun showSelectedUser(data: UserItem) {
-        val moveWithParcelableIntent = Intent(this@MainActivity, DetailUserActivity::class.java)
-        moveWithParcelableIntent.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
-        startActivity(moveWithParcelableIntent)
-    }
-
-
 }

@@ -41,7 +41,7 @@ data class DetailResponse(
 	val siteAdmin: Boolean,
 
 	@field:SerializedName("company")
-	val company: String,
+	val company: String?,
 
 	@field:SerializedName("id")
 	val id: Int,
@@ -92,10 +92,10 @@ data class DetailResponse(
 	val following: Int,
 
 	@field:SerializedName("name")
-	val name: String,
+	val name: String?,
 
 	@field:SerializedName("location")
-	val location: String,
+	val location: String?,
 
 	@field:SerializedName("node_id")
 	val nodeId: String
