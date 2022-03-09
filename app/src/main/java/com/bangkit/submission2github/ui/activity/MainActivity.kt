@@ -2,6 +2,7 @@ package com.bangkit.submission2github.ui.activity
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this, {
             event.showLoading(it, binding.progressBar)
         })
+
+
 //
 //        viewModel.getTotalCount.observe(this, {
 //            showText(it)
@@ -80,18 +83,28 @@ class MainActivity : AppCompatActivity() {
         }
         adapter = SearchAdapter(listUser)
         binding.rvUsers.adapter = adapter
+//
+//        adapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback {
+//            override fun onItemClicked(data: UserItem) {
+//                showSelectedUser(data)
+//            }
+//        })
 
         adapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback {
+
             override fun onItemClicked(data: UserItem) {
-                showSelectedUser(data)
+                Intent(this@MainActivity, DetailUserActivity::class.java).also {
+                    it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+                    startActivity(it)
+                }
             }
         })
     }
 
     private fun showSelectedUser(data: UserItem) {
-//        val moveWithParcelableIntent = Intent(this@MainActivity, UserDetailActivity::class.java)
-//        moveWithParcelableIntent.putExtra(UserDetailActivity.EXTRA_USER, data)
-//        startActivity(moveWithParcelableIntent)
+        val moveWithParcelableIntent = Intent(this@MainActivity, DetailUserActivity::class.java)
+        moveWithParcelableIntent.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+        startActivity(moveWithParcelableIntent)
     }
 
 

@@ -45,6 +45,7 @@
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="@string/name" />
 
+
         <TextView
             android:id="@+id/tv_item_htmlurl"
             style="@style/TextContent.Subtitle.Small"

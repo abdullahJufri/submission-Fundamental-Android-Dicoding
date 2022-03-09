@@ -5,9 +5,12 @@
     <string name="user_name">Username</string>
     <string name="location">Location</string>
     <string name="company">Company</string>
-    <string name="follower">Followers</string>
-    <string name="following">Following</string>
-    <string name="repository">%s Repository</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Following</string>
+<!--    <string name="repository">%s Repository</string>-->
+    <string name="repository">%d\n repository</string>
+    <string name="following">%d\n following</string>
+    <string name="follower">%d\n follower</string>
     <string name="number">1234</string>
     <string name="search_hint">Masukkan kata</string>
     <string name="htmlurl">html url</string>

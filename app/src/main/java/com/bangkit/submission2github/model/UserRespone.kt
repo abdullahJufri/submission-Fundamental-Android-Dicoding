@@ -1,5 +1,6 @@
 package com.bangkit.submission2github.model
 
+
 import com.google.gson.annotations.SerializedName
 
 data class UserResponse(

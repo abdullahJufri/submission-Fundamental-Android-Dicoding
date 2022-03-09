@@ -37,7 +37,7 @@ class SearchAdapter(private val listUser: List<UserItem>) :
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class ViewHolder(var binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(var binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface OnItemClickCallback {
         fun onItemClicked(data: UserItem)

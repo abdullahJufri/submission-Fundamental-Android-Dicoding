@@ -1,6 +1,7 @@
 package com.bangkit.submission2github.api
 
 import com.bangkit.submission2github.BuildConfig
+import com.bangkit.submission2github.model.DetailResponse
 import com.bangkit.submission2github.model.UserItem
 import com.bangkit.submission2github.model.UserResponse
 
@@ -22,7 +23,7 @@ interface ApiService {
     @Headers("Authorization: token ${BuildConfig.GITHUB_TOKEN}")
     fun getUserDetail(
         @Path("username") username: String
-    ): Call<UserItem>
+    ): Call<DetailResponse>
 
     @GET("users/{username}/followers")
     @Headers("Authorization: token ${BuildConfig.GITHUB_TOKEN}")
