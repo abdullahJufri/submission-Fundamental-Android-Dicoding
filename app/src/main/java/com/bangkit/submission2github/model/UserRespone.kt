@@ -1,8 +1,11 @@
 package com.bangkit.submission2github.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class UserResponse(
 
     @field:SerializedName("total_count")
@@ -11,8 +14,9 @@ data class UserResponse(
 
     @field:SerializedName("items")
     val items: List<UserItem>
-)
+) : Parcelable
 
+@Parcelize
 data class UserItem(
 
     @field:SerializedName("gists_url")
@@ -71,4 +75,4 @@ data class UserItem(
 
     @field:SerializedName("organizations_url")
     val organizationsUrl: String
-)
+) : Parcelable

@@ -29,11 +29,11 @@ interface ApiService {
     @Headers("Authorization: token ${BuildConfig.GITHUB_TOKEN}")
     fun getFollower(
         @Path("username") username: String
-    ): Call<ArrayList<UserItem>>
+    ): Call<List<UserItem>>
 
     @GET("users/{username}/following")
     @Headers("Authorization: token ${BuildConfig.GITHUB_TOKEN}")
     fun getFollowing(
         @Path("username") username: String
-    ): Call<ArrayList<UserItem>>
+    ): Call<List<UserItem>>
 }
