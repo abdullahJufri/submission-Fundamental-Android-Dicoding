@@ -14,4 +14,11 @@
         android:title="@string/favorite"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/dark_mode"
+        android:actionLayout="@layout/dark_mode_switch"
+        android:icon="@drawable/ic_dark_mode_24"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
 </menu>

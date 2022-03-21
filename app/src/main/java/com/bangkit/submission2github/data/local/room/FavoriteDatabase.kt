@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.bangkit.submission2github.data.local.entity.FavoriteEntity
 
 @Database(entities = [FavoriteEntity::class], version = 5)
-abstract class FavoriteDatabase :RoomDatabase() {
+abstract class FavoriteDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao
 
     companion object {

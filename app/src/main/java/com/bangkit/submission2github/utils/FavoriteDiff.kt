@@ -3,7 +3,10 @@ package com.bangkit.submission2github.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.bangkit.submission2github.data.local.entity.FavoriteEntity
 
-class FavoriteDiff(private val mOldFavList: List<FavoriteEntity>, private val mNewFavList: List<FavoriteEntity>):
+class FavoriteDiff(
+    private val mOldFavList: List<FavoriteEntity>,
+    private val mNewFavList: List<FavoriteEntity>
+) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return mOldFavList.size

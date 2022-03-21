@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.submission2github.ui.adapter.FollowAdapter
-import com.bangkit.submission2github.databinding.FragmentFollowerBinding
 import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.databinding.FragmentFollowerBinding
 import com.bangkit.submission2github.ui.activity.DetailUserActivity
+import com.bangkit.submission2github.ui.adapter.FollowAdapter
 import com.bangkit.submission2github.ui.viewmodels.FollowerViewModel
 import com.bangkit.submission2github.utils.Helper
 

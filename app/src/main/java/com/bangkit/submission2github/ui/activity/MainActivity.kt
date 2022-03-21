@@ -7,16 +7,28 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CompoundButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.submission2github.R
-import com.bangkit.submission2github.ui.adapter.SearchAdapter
-import com.bangkit.submission2github.databinding.ActivityMainBinding
 import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.databinding.ActivityMainBinding
+import com.bangkit.submission2github.theme.SettingPreferences
+import com.bangkit.submission2github.theme.ThemeViewModel
+import com.bangkit.submission2github.theme.ThemeViewModelFactory
+import com.bangkit.submission2github.ui.adapter.SearchAdapter
 import com.bangkit.submission2github.ui.viewmodels.MainViewModel
 import com.bangkit.submission2github.utils.Helper
+import com.google.android.material.switchmaterial.SwitchMaterial
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -29,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         viewModel.getListUsers.observe(this) { listGithubUser ->
             setUserData(listGithubUser)
@@ -66,16 +79,36 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+
+
+        val item: MenuItem = menu.findItem(R.id.dark_mode)
+        item.setActionView(R.layout.dark_mode_switch)
+        val switch: SwitchMaterial =
+            menu.findItem(R.id.dark_mode).actionView.findViewById(R.id.switch_theme)
+        val pref = SettingPreferences.getInstance(dataStore)
+        val themeViewModel =
+            ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
+
+        themeViewModel.getThemeSettings().observe(this) { isDarkMode: Boolean ->
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                switch.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                switch.isChecked = false
+            }
+        }
+
+        switch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            themeViewModel.saveThemeSetting(isChecked)
+        }
+
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-//            R.id.theme_setting -> {
-//                val intent = Intent(this@MainActivity, ThemeSettingsActivity::class.java)
-//                startActivity(intent)
-//                return true
-//            }
             R.id.favorites -> {
                 val intent = Intent(this@MainActivity, FavoriteActivity::class.java)
                 startActivity(intent)

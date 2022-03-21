@@ -53,22 +53,23 @@ class DetailUserActivity : AppCompatActivity() {
             helper.showLoading(false, binding.progressBar)
         }
 
-        viewModel.status.observe(this, { status ->
+        viewModel.status.observe(this) { status ->
             status?.let {
                 Toast.makeText(this, status.toString(), Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setTabLayout()
 
 
-        viewModel.listDetail.observe(this, { detailList ->
+        viewModel.listDetail.observe(this) { detailList ->
             detailUser = detailList
             setDetailItem(detailUser)
             favoriteUser = FavoriteEntity(detailUser.id, detailUser.login)
-            viewModel.getAllFavorites().observe(this, { favoriteList ->
+            viewModel.getAllFavorites().observe(this) { favoriteList ->
                 if (favoriteList != null) {
                     for (data in favoriteList) {
                         if (detailUser.id == data.id) {
@@ -77,9 +78,9 @@ class DetailUserActivity : AppCompatActivity() {
                         }
                     }
                 }
-            })
+            }
 
-            // Favorite event
+
             binding.fabFavorite.setOnClickListener {
                 if (!buttonState) {
                     buttonState = true
@@ -92,12 +93,12 @@ class DetailUserActivity : AppCompatActivity() {
                     helper.showToast(this, "User dihapus dari Favorit.")
                 }
             }
-        })
+        }
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): DetailUserViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(DetailUserViewModel::class.java)
+        return ViewModelProvider(activity, factory)[DetailUserViewModel::class.java]
     }
 
     private fun setDetailItem(detailList: DetailResponse) {
@@ -161,7 +162,6 @@ class DetailUserActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USERNAME = "extra_username"
-        const val EXTRA_F = "extra_f"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(

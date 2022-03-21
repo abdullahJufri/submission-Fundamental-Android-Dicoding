@@ -1,4 +1,4 @@
-package com.bangkit.submission2github.data
+package com.bangkit.submission2github.data.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData

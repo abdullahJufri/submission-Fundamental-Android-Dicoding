@@ -3,11 +3,12 @@ package com.bangkit.submission2github.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.submission2github.databinding.ItemRowUserBinding
 import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.databinding.ItemRowUserBinding
 import com.bumptech.glide.Glide
 
-class FollowAdapter(private val listFollower: List<UserItem>) : RecyclerView.Adapter<FollowAdapter.ViewHolder>(){
+class FollowAdapter(private val listFollower: List<UserItem>) :
+    RecyclerView.Adapter<FollowAdapter.ViewHolder>() {
     inner class ViewHolder(var binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

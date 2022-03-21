@@ -22,7 +22,8 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class FavoriteViewHolder(private val binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavoriteViewHolder(private val binding: ItemRowUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(favorites: FavoriteEntity) {
             with(binding) {
                 tvItemName.text = favorites.login
@@ -41,7 +42,8 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        val itemRowUserBinding = ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemRowUserBinding =
+            ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoriteViewHolder(itemRowUserBinding)
     }
 

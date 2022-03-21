@@ -6,10 +6,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bangkit.submission2github.data.FavoriteRepository
 import com.bangkit.submission2github.data.local.entity.FavoriteEntity
 import com.bangkit.submission2github.data.remote.api.ApiConfig
 import com.bangkit.submission2github.data.remote.model.DetailResponse
+import com.bangkit.submission2github.data.repository.FavoriteRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,9 +36,8 @@ class DetailUserViewModel(application: Application) : ViewModel() {
         mFavoriteUserRepository.deleteUserFavorite(id)
     }
 
-    fun getAllFavorites(): LiveData<List<FavoriteEntity>> = mFavoriteUserRepository.getAllFavorites()
-
-
+    fun getAllFavorites(): LiveData<List<FavoriteEntity>> =
+        mFavoriteUserRepository.getAllFavorites()
 
 
     fun getUserItem(username: String) {
@@ -63,9 +62,5 @@ class DetailUserViewModel(application: Application) : ViewModel() {
             }
 
         })
-    }
-
-    companion object {
-        private const val TAG = "UserDetailModel"
     }
 }
