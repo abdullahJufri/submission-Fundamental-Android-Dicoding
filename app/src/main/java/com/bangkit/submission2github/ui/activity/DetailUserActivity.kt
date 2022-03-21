@@ -1,5 +1,6 @@
 package com.bangkit.submission2github.ui.activity
 
+import android.content.Intent.EXTRA_USER
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -13,6 +14,7 @@ import com.bangkit.submission2github.ui.adapter.SectionsPagerAdapter
 import com.bangkit.submission2github.databinding.ActivityDetailUserBinding
 import com.bangkit.submission2github.data.remote.model.DetailResponse
 import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.ui.activity.DetailUserActivity.Companion.TAB_TITLES
 import com.bangkit.submission2github.ui.viewmodels.DetailUserViewModel
 import com.bangkit.submission2github.ui.viewmodels.ViewModelFactory
 import com.bangkit.submission2github.utils.Helper
@@ -133,20 +135,42 @@ private lateinit var viewModel: DetailUserViewModel
     }
 
     private fun setTabLayout() {
-        val dataIntent = intent.getParcelableExtra<UserItem>(EXTRA_USERNAME) as UserItem
-        val username: String = dataIntent.login
-        viewModel.getUserItem(username)
+        val dataIntent = intent.extras
 
-        val bundle = Bundle()
-        bundle.putString(EXTRA_USERNAME, username)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this@DetailUserActivity, bundle)
-        val viewPager: ViewPager2 = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
+        if (dataIntent != null) {
+            val userLogin = dataIntent.getString(EXTRA_USERNAME)
+            if (userLogin != null) {
+                viewModel.getUserItem(userLogin)
+                val login = Bundle()
+                login.putString(EXTRA_USERNAME, userLogin)
+                val sectionPagerAdapter = SectionsPagerAdapter(this, login)
+                val viewPager: ViewPager2 = binding.viewPager
+
+                viewPager.adapter = sectionPagerAdapter
+                val tabs: TabLayout = binding.tabs
+//                val tabTitle = resources.getString(TAB_TITLES)
+                TabLayoutMediator(tabs, viewPager) { tab, position ->
+                    tab.text = resources.getString(TAB_TITLES[position])
+                }.attach()
+            }
+        }
+
+
+
+//        val username: String = dataIntent.login
+//        viewModel.getUserItem(username)
+//
+//        val bundle = Bundle()
+//        bundle.putString(EXTRA_USERNAME, username)
+//
+//        val sectionsPagerAdapter = SectionsPagerAdapter(this@DetailUserActivity, bundle)
+//        val viewPager: ViewPager2 = binding.viewPager
+//        viewPager.adapter = sectionsPagerAdapter
+//        val tabs: TabLayout = binding.tabs
+//        TabLayoutMediator(tabs, viewPager) { tab, position ->
+//            tab.text = resources.getString(TAB_TITLES[position])
+//        }.attach()
         supportActionBar?.elevation = 0f
 
     }
@@ -158,6 +182,7 @@ private lateinit var viewModel: DetailUserViewModel
 
     companion object {
         const val EXTRA_USERNAME = "extra_username"
+        const val EXTRA_F = "extra_f"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
