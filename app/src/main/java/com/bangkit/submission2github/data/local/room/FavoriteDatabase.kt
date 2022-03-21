@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bangkit.submission2github.data.local.entity.FavoriteEntity
 
-@Database(entities = [FavoriteEntity::class], version = 1)
+@Database(entities = [FavoriteEntity::class], version = 5)
 abstract class FavoriteDatabase :RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao
 
@@ -20,7 +20,7 @@ abstract class FavoriteDatabase :RoomDatabase() {
                 synchronized(FavoriteDatabase::class.java) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
-                        FavoriteDatabase::class.java, "favorite_database"
+                        FavoriteDatabase::class.java, "favorite_user_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

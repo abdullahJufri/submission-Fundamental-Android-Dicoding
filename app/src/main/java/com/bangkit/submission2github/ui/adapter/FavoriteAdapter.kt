@@ -11,7 +11,7 @@ import com.bangkit.submission2github.ui.activity.DetailUserActivity
 import com.bangkit.submission2github.utils.FavoriteDiff
 import com.bumptech.glide.Glide
 
-class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     private val listFavorites = ArrayList<FavoriteEntity>()
 
     fun setFavorites(favorites: List<FavoriteEntity>) {

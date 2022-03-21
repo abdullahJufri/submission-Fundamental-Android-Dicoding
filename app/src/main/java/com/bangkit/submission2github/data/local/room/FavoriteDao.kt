@@ -6,15 +6,15 @@ import com.bangkit.submission2github.data.local.entity.FavoriteEntity
 
 @Dao
 interface FavoriteDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-     fun addFavorite(favorite: FavoriteEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFavorite(user: FavoriteEntity)
+
+    @Query("DELETE FROM favo WHERE favo.id = :id")
+    fun removeFavorite(id: Int)
 
     @Query("SELECT * FROM favo ORDER BY login ASC")
     fun getAllUser(): LiveData<List<FavoriteEntity>>
 
-    @Query("SELECT count(*) FROM favo WHERE favo.id = :id")
-     fun checkUser(id: Int): Int
-
-    @Query("DELETE FROM favo WHERE favo.id = :id")
-    fun deleteFavorite(id: Int): Int
+    @Query("SELECT * FROM favo WHERE favo.id = :id")
+    fun getUserById(id: Int): LiveData<FavoriteEntity>
 }

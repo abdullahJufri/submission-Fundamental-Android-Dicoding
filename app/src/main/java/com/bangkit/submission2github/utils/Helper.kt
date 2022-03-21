@@ -1,6 +1,8 @@
 package com.bangkit.submission2github.utils
 
+import android.content.Context
 import android.view.View
+import android.widget.Toast
 
 class Helper {
     fun showLoading(isLoading: Boolean, view: View) {
@@ -9,5 +11,10 @@ class Helper {
         } else {
             view.visibility = View.INVISIBLE
         }
+    }
+
+
+    fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

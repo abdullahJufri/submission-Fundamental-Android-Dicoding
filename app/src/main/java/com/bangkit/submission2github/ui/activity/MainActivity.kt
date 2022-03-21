@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -66,6 +67,22 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+//            R.id.theme_setting -> {
+//                val intent = Intent(this@MainActivity, ThemeSettingsActivity::class.java)
+//                startActivity(intent)
+//                return true
+//            }
+            R.id.favorites -> {
+                val intent = Intent(this@MainActivity, FavoriteActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> true
+        }
     }
 
     private fun setUserData(listGithubUser: List<UserItem>) {
