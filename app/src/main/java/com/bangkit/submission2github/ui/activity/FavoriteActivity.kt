@@ -45,6 +45,11 @@ class FavoriteActivity : AppCompatActivity() {
         return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

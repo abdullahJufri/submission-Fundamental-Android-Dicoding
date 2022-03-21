@@ -29,11 +29,11 @@ class DetailUserViewModel(application: Application) : ViewModel() {
         FavoriteRepository(application)
 
     fun insert(user: FavoriteEntity) {
-        mFavoriteUserRepository.insert(user)
+        mFavoriteUserRepository.insertUserFavorite(user)
     }
 
     fun delete(id: Int) {
-        mFavoriteUserRepository.delete(id)
+        mFavoriteUserRepository.deleteUserFavorite(id)
     }
 
     fun getAllFavorites(): LiveData<List<FavoriteEntity>> = mFavoriteUserRepository.getAllFavorites()

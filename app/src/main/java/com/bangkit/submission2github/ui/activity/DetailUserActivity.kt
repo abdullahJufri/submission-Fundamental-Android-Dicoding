@@ -1,20 +1,16 @@
 package com.bangkit.submission2github.ui.activity
 
-import android.content.Intent.EXTRA_USER
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.submission2github.R
 import com.bangkit.submission2github.data.local.entity.FavoriteEntity
-import com.bangkit.submission2github.ui.adapter.SectionsPagerAdapter
-import com.bangkit.submission2github.databinding.ActivityDetailUserBinding
 import com.bangkit.submission2github.data.remote.model.DetailResponse
-import com.bangkit.submission2github.data.remote.model.UserItem
-import com.bangkit.submission2github.ui.activity.DetailUserActivity.Companion.TAB_TITLES
+import com.bangkit.submission2github.databinding.ActivityDetailUserBinding
+import com.bangkit.submission2github.ui.adapter.SectionsPagerAdapter
 import com.bangkit.submission2github.ui.viewmodels.DetailUserViewModel
 import com.bangkit.submission2github.ui.viewmodels.ViewModelFactory
 import com.bangkit.submission2github.utils.Helper
@@ -24,8 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
-//    private val viewModel by viewModels<DetailUserViewModel>()
-private lateinit var viewModel: DetailUserViewModel
+    private lateinit var viewModel: DetailUserViewModel
     private val helper = Helper()
 
     private var detailUser = DetailResponse()
@@ -78,23 +73,23 @@ private lateinit var viewModel: DetailUserViewModel
                     for (data in favoriteList) {
                         if (detailUser.id == data.id) {
                             buttonState = true
-                            binding?.fabFavorite?.setImageResource(R.drawable.ic_favorite_24)
+                            binding.fabFavorite.setImageResource(R.drawable.ic_favorite_24)
                         }
                     }
                 }
             })
 
             // Favorite event
-            binding?.fabFavorite?.setOnClickListener {
+            binding.fabFavorite.setOnClickListener {
                 if (!buttonState) {
                     buttonState = true
-                    binding?.fabFavorite?.setImageResource(R.drawable.ic_favorite_24)
+                    binding.fabFavorite.setImageResource(R.drawable.ic_favorite_24)
                     insertToDatabase(detailUser)
                 } else {
                     buttonState = false
-                    binding?.fabFavorite?.setImageResource(R.drawable.ic_unfavorite_24)
+                    binding.fabFavorite.setImageResource(R.drawable.ic_unfavorite_24)
                     viewModel.delete(detailUser.id)
-                    helper.showToast(this, "Favorite user has been deleted.")
+                    helper.showToast(this, "User dihapus dari Favorit.")
                 }
             }
         })
@@ -130,7 +125,7 @@ private lateinit var viewModel: DetailUserViewModel
             favoriteUser?.htmlUrl = detailList.htmlUrl
             favoriteUser?.avatarUrl = detailList.avatarUrl
             viewModel.insert(favoriteUser as FavoriteEntity)
-            helper.showToast(this, "User has been favorited.")
+            helper.showToast(this, "User Ditambahkan ke Favorit.")
         }
     }
 
@@ -149,28 +144,12 @@ private lateinit var viewModel: DetailUserViewModel
 
                 viewPager.adapter = sectionPagerAdapter
                 val tabs: TabLayout = binding.tabs
-//                val tabTitle = resources.getString(TAB_TITLES)
                 TabLayoutMediator(tabs, viewPager) { tab, position ->
                     tab.text = resources.getString(TAB_TITLES[position])
                 }.attach()
             }
         }
 
-
-
-//        val username: String = dataIntent.login
-//        viewModel.getUserItem(username)
-//
-//        val bundle = Bundle()
-//        bundle.putString(EXTRA_USERNAME, username)
-//
-//        val sectionsPagerAdapter = SectionsPagerAdapter(this@DetailUserActivity, bundle)
-//        val viewPager: ViewPager2 = binding.viewPager
-//        viewPager.adapter = sectionsPagerAdapter
-//        val tabs: TabLayout = binding.tabs
-//        TabLayoutMediator(tabs, viewPager) { tab, position ->
-//            tab.text = resources.getString(TAB_TITLES[position])
-//        }.attach()
         supportActionBar?.elevation = 0f
 
     }

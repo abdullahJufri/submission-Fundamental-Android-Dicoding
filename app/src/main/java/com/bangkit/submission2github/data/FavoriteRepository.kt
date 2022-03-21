@@ -9,21 +9,21 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class FavoriteRepository(application: Application) {
-    private val mFavoriteDao: FavoriteDao
+    private val favoriteDao: FavoriteDao
     private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
 
     init {
         val db = FavoriteDatabase.getDatabase(application)
-        mFavoriteDao = db.favoriteDao()
+        favoriteDao = db.favoriteDao()
     }
 
-    fun getAllFavorites(): LiveData<List<FavoriteEntity>> = mFavoriteDao.getAllUser()
+    fun getAllFavorites(): LiveData<List<FavoriteEntity>> = favoriteDao.getAllUser()
 
-    fun insert(user: FavoriteEntity) {
-        executorService.execute { mFavoriteDao.insertFavorite(user) }
+    fun insertUserFavorite(user: FavoriteEntity) {
+        executorService.execute { favoriteDao.addFavorite(user) }
     }
 
-    fun delete(id: Int) {
-        executorService.execute { mFavoriteDao.removeFavorite(id) }
+    fun deleteUserFavorite(id: Int) {
+        executorService.execute { favoriteDao.deleteFavorite(id) }
     }
 }
