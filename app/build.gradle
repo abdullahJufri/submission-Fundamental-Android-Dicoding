@@ -67,5 +67,10 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.4.2'
 
 
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1" //viewModelScope
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1" //liveData
+    implementation "androidx.room:room-ktx:2.4.2"
+
+
 
 }

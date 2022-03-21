@@ -4,13 +4,17 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.submission2github.R
 import com.bangkit.submission2github.ui.adapter.SectionsPagerAdapter
 import com.bangkit.submission2github.databinding.ActivityDetailUserBinding
 import com.bangkit.submission2github.data.remote.model.DetailResponse
 import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.ui.adapter.FavoriteAdapter
 import com.bangkit.submission2github.ui.viewmodels.DetailUserViewModel
+import com.bangkit.submission2github.ui.viewmodels.FavoriteViewModel
+import com.bangkit.submission2github.ui.viewmodels.ViewModelFactory
 import com.bangkit.submission2github.utils.Helper
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -20,6 +24,10 @@ class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
     private val viewModel by viewModels<DetailUserViewModel>()
     private val helper = Helper()
+    val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+    val viewModel2: FavoriteViewModel by viewModels {
+        factory
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +51,13 @@ class DetailUserActivity : AppCompatActivity() {
             helper.showLoading(false, binding.progressBar)
         }
 
+        val favoriteAdapter = FavoriteAdapter { user ->
+            if (user.isFavorited){
+                viewModel2.deleteNews(user)
+            } else {
+                viewModel2.saveNews(user)
+            }
+        }
 
         setTabLayout()
     }

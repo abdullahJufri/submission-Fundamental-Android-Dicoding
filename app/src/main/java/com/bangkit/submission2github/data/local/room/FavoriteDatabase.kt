@@ -15,12 +15,12 @@ abstract class FavoriteDatabase :RoomDatabase() {
         private var INSTANCE: FavoriteDatabase? = null
 
         @JvmStatic
-        fun getDatabase(context: Context): FavoriteDatabase {
+        fun getInstance(context: Context): FavoriteDatabase {
             if (INSTANCE == null) {
                 synchronized(FavoriteDatabase::class.java) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
-                        FavoriteDatabase::class.java, "favorite_database"
+                        FavoriteDatabase::class.java, "Favo.db"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

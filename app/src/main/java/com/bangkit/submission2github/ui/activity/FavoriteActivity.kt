@@ -25,12 +25,12 @@ class FavoriteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        viewModel.getAllFavorites().observe(this, { favoriteList ->
-            if (favoriteList != null) {
-                adapter.setFavorites(favoriteList)
-            }
-        })
-        adapter = FavoriteAdapter()
+//        viewModel.getAllFavorites().observe(this, { favoriteList ->
+//            if (favoriteList != null) {
+//                adapter.setFavorites(favoriteList)
+//            }
+////        })
+//        adapter = FavoriteAdapter()
         binding?.rvFavorites?.layoutManager = LinearLayoutManager(this)
         binding?.rvFavorites?.setHasFixedSize(false)
         binding?.rvFavorites?.adapter = adapter
