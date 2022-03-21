@@ -1,4 +1,4 @@
-package com.bangkit.submission2github.api
+package com.bangkit.submission2github.data.remote.api
 
 import com.bangkit.submission2github.BuildConfig
 import okhttp3.OkHttpClient

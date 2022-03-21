@@ -11,18 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.submission2github.R
-import com.bangkit.submission2github.adapter.SearchAdapter
+import com.bangkit.submission2github.ui.adapter.SearchAdapter
 import com.bangkit.submission2github.databinding.ActivityMainBinding
-import com.bangkit.submission2github.model.UserItem
+import com.bangkit.submission2github.data.remote.model.UserItem
 import com.bangkit.submission2github.ui.viewmodels.MainViewModel
-import com.bangkit.submission2github.utils.Event
+import com.bangkit.submission2github.utils.Helper
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: SearchAdapter
     private val viewModel by viewModels<MainViewModel>()
     private var listUserItem = ArrayList<UserItem>()
-    private val event = Event()
+    private val helper = Helper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.isLoading.observe(this) {
-            event.showLoading(it, binding.progressBar)
+            helper.showLoading(it, binding.progressBar)
         }
 
         val layoutManager = LinearLayoutManager(this@MainActivity)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.option_menu, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        val searchView = menu.findItem(R.id.search)?.actionView as SearchView
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)

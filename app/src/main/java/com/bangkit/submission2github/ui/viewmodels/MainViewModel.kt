@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bangkit.submission2github.api.ApiConfig
-import com.bangkit.submission2github.model.UserItem
-import com.bangkit.submission2github.model.UserResponse
+import com.bangkit.submission2github.data.remote.api.ApiConfig
+import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.data.remote.model.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

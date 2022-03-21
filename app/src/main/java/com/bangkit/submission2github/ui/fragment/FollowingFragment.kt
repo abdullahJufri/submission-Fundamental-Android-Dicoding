@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.submission2github.adapter.FollowAdapter
+import com.bangkit.submission2github.ui.adapter.FollowAdapter
 import com.bangkit.submission2github.databinding.FragmentFollowingBinding
-import com.bangkit.submission2github.model.UserItem
+import com.bangkit.submission2github.data.remote.model.UserItem
 import com.bangkit.submission2github.ui.activity.DetailUserActivity
 import com.bangkit.submission2github.ui.viewmodels.FollowingViewModel
-import com.bangkit.submission2github.utils.Event
+import com.bangkit.submission2github.utils.Helper
 
 
 class FollowingFragment : Fragment() {
@@ -20,7 +20,7 @@ class FollowingFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<FollowingViewModel>()
     private lateinit var adapter: FollowAdapter
-    private val event = Event()
+    private val helper = Helper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +41,11 @@ class FollowingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            event.showLoading(it, binding.progressBar)
+            helper.showLoading(it, binding.progressBar)
         }
         viewModel.listFollowing.observe(viewLifecycleOwner) { listFollowing ->
             setDataToFragment(listFollowing)
-            event.showLoading(false, binding.progressBar)
+            helper.showLoading(false, binding.progressBar)
         }
 
         viewModel.getFollower(arguments?.getString(DetailUserActivity.EXTRA_USERNAME).toString())

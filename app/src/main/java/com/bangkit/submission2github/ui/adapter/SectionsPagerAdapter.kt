@@ -1,4 +1,4 @@
-package com.bangkit.submission2github.adapter
+package com.bangkit.submission2github.ui.adapter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

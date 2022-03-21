@@ -1,4 +1,4 @@
-package com.bangkit.submission2github.model
+package com.bangkit.submission2github.data.remote.model
 
 
 import android.os.Parcelable

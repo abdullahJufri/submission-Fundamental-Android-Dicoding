@@ -1,9 +1,9 @@
-package com.bangkit.submission2github.api
+package com.bangkit.submission2github.data.remote.api
 
 import com.bangkit.submission2github.BuildConfig
-import com.bangkit.submission2github.model.DetailResponse
-import com.bangkit.submission2github.model.UserItem
-import com.bangkit.submission2github.model.UserResponse
+import com.bangkit.submission2github.data.remote.model.DetailResponse
+import com.bangkit.submission2github.data.remote.model.UserItem
+import com.bangkit.submission2github.data.remote.model.UserResponse
 
 import retrofit2.Call
 import retrofit2.http.GET
